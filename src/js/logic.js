@@ -69,8 +69,12 @@ export function sortByDate(events) {
 // ---------- Búsqueda y filtros ----------
 
 export function matchesSearch(event, query) {
-  const text = `${event.title} ${event.venue} ${event.categoryLabel}`.toLowerCase();
-  return text.includes(query.trim().toLowerCase());
+  const normalize = (value) => value
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+    .toLowerCase();
+  const text = normalize(`${event.title} ${event.venue} ${event.categoryLabel}`);
+  return text.includes(normalize(query.trim()));
 }
 
 export function filterEvents(events, { query = '', category = 'todas', day = null, onlyMine = false, mine = [] } = {}) {
