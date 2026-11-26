@@ -27,12 +27,16 @@ export function spotsLabel(event) {
   if (isFull(event)) {
     return 'Cupo lleno';
   }
-  return `${spotsLeft(event)} lugares`;
+  const remaining = spotsLeft(event);
+  return `${remaining} ${remaining === 1 ? 'lugar' : 'lugares'}`;
 }
 
 // ---------- Precio ----------
 
 export function formatPrice(price) {
+  if (price === 0) {
+    return 'Gratis';
+  }
   return `$${price}`;
 }
 
@@ -40,7 +44,7 @@ export function formatPrice(price) {
 
 export function formatShortDate(dateStr) {
   const date = toDate(dateStr);
-  return `${pad(date.getDate())}/${pad(date.getMonth())}`;
+  return `${pad(date.getDate())}/${pad(date.getMonth() + 1)}`;
 }
 
 export function weekdayName(dateStr) {
@@ -53,6 +57,9 @@ export function daysUntil(dateStr, todayStr) {
 
 export function countdownLabel(dateStr, todayStr) {
   const days = daysUntil(dateStr, todayStr);
+  if (days < 0) {
+    return 'Finalizado';
+  }
   if (days === 0) {
     return 'Hoy';
   }
