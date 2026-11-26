@@ -27,7 +27,8 @@ export function spotsLabel(event) {
   if (isFull(event)) {
     return 'Cupo lleno';
   }
-  return `${spotsLeft(event)} lugares`;
+  const remaining = spotsLeft(event);
+  return `${remaining} ${remaining === 1 ? 'lugar' : 'lugares'}`;
 }
 
 // ---------- Precio ----------
@@ -56,6 +57,9 @@ export function daysUntil(dateStr, todayStr) {
 
 export function countdownLabel(dateStr, todayStr) {
   const days = daysUntil(dateStr, todayStr);
+  if (days < 0) {
+    return 'Finalizado';
+  }
   if (days === 0) {
     return 'Hoy';
   }

@@ -53,17 +53,17 @@ test('[BUG-4] Un evento sin costo dice "Gratis"', () => {
   assert.equal(formatPrice(50), '$50');
 });
 
-test.skip('[BUG-5] "1 lugar" en singular', () => {
+test('[BUG-5] "1 lugar" en singular', () => {
   assert.equal(spotsLabel(event({ capacity: 120, registered: 119 })), '1 lugar');
   assert.equal(spotsLabel(event({ capacity: 20, registered: 12 })), '8 lugares');
 });
 
-test.skip('[BUG-6] Un evento que ya pasó dice "Finalizado"', () => {
+test('[BUG-6] Un evento que ya pasó dice "Finalizado"', () => {
   assert.equal(countdownLabel('2026-11-23', '2026-11-26'), 'Finalizado');
   assert.equal(countdownLabel('2026-11-30', '2026-11-26'), 'Faltan 4 días');
 });
 
-test.skip('[BUG-7] El texto secundario se puede leer (contraste mínimo 4.5:1)', () => {
+test('[BUG-7] El texto secundario se puede leer (contraste mínimo 4.5:1)', () => {
   const css = readFileSync(new URL('../src/css/styles.css', import.meta.url), 'utf8');
   const muted = css.match(/--text-muted:\s*(#[0-9a-fA-F]{6})/)?.[1];
   const surface = css.match(/--surface:\s*(#[0-9a-fA-F]{6})/)?.[1];
